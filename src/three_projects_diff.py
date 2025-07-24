@@ -41,11 +41,21 @@ def decide_status(exists, shas):
     return "all_exist_same" if len(uniq) == 1 else "all_exist_diff"
 
 def main():
+    # 引数の設定
     ap = argparse.ArgumentParser()
     ap.add_argument("--p1", required=True)
     ap.add_argument("--p2", required=True)
     ap.add_argument("--p3", required=True)
-    ap.add_argument("--out", default="three_projects_diff.csv")
+
+    # リポジトリルート
+    repo_root = Path(__file__).resolve().parents[1]
+    default_output = repo_root / "output" / "three_projects_diff.csv"
+
+    ap.add_argument(
+        "--out",
+        default=str(default_output),
+        help="Output CSV path (default: <repo_root>/output/three_projects_diff.csv)"
+    )
     args = ap.parse_args()
 
     roots = [Path(args.p1), Path(args.p2), Path(args.p3)]
