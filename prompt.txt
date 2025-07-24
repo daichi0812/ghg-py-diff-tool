@@ -1,6 +1,6 @@
 python3 two_projects_diff.py \
   /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/analysis \
-  /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/initialization \
+  /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/simulator/tameru \
   --out ../output/two_projects_diff.csv \
   --diff-dir ../output/diffs \
   --ext .py
