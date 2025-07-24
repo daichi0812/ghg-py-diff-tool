@@ -1,0 +1,18 @@
+--- /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/analysis/qt_gl_widget2.py
++++ /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/simulator/nagasu/qt_gl_widget2.py
+@@ -207,7 +207,7 @@
+         self.inner_height = h
+
+ 
+
+     def initializeGL(self):
+
+-        glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
+
++        #glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH)
+
+         glEnable(GL_BLEND)
+
+         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+
+         glClearColor(1.0, 1.0, 1.0, 1.0)

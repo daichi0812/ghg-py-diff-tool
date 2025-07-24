@@ -1,0 +1,71 @@
+--- /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/analysis/initResumefn.py
++++ /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/simulator/nagasu/initResumefn.py
+@@ -1,6 +1,8 @@
+ import xml.etree.ElementTree as ET 
+
+ import sys
+
+ from progressh5 import *
+
++import pathlib
+
++import os
+
+ 
+
+ 
+
+ def main():
+
+@@ -60,6 +62,26 @@
+     resume_tree.write(resume_xml_fn)
+
+     tree.write(homogenize_stress_fn)
+
+ 
+
++    #処理時間計測のためのファイル作成
+
++    resume_MPM_xml_fn = root[2].attrib["resume_MPM_fn"]
+
++    resume_MPM_tree = ET.parse(resume_MPM_xml_fn)
+
++    resume_MPM_root = resume_MPM_tree.getroot()
+
++    if os.path.isfile(root[6].attrib["processing_time"]):
+
++        os.remove(root[6].attrib["processing_time"])
+
++    if os.path.isfile(resume_root[4].attrib["processing_time"]):
+
++        os.remove(resume_root[4].attrib["processing_time"])
+
++    if os.path.isfile(resume_MPM_root[6].attrib["processing_time"]):
+
++        os.remove(resume_MPM_root[6].attrib["processing_time"])
+
++    if os.path.isfile(root[6].attrib["homogenize_time"]):
+
++        os.remove(root[6].attrib["homogenize_time"])
+
++    if root[6].attrib["mode"] == "11":
+
++        pathlib.Path(root[6].attrib["processing_time"]).touch()
+
++        pathlib.Path(resume_root[4].attrib["processing_time"]).touch()
+
++        pathlib.Path(resume_MPM_root[6].attrib["processing_time"]).touch()
+
++        pathlib.Path(root[6].attrib["homogenize_time"]).touch()
+
++
+
++
+
++
+
+ 
+
+ if __name__ == "__main__":
+
+     main()

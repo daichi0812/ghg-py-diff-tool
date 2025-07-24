@@ -1,0 +1,32 @@
+--- /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/analysis/interpolateMPMStress.py
++++ /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/simulator/nagasu/interpolateMPMStress.py
+@@ -1,14 +1,10 @@
+ import numpy as np
+
+-from OpenGL.GL import *
+
+-from OpenGL.GLU import *
+
+-from OpenGL.GLUT import *
+
+-from PyQt5 import QtCore, QtGui, QtWidgets
+
+-from PyQt5.QtOpenGL import *
+
+ import math
+
+ import copy
+
+ from grainh5 import *
+
+ from forceh5 import *
+
+ from homogenizationh5 import *
+
++import ctypes
+
+ class interpolateMPMStress:
+
+     def __init__(self,  h, particle_data, grid_start):
+
+         self.resolution = np.zeros(2, dtype=ctypes.c_int)

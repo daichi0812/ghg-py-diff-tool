@@ -1,0 +1,139 @@
+--- /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/analysis/allstepMPMBeforeflow.py
++++ /Users/shotaro/DevHub/CG/generalized-hybrid-grains/src/python/simulator/nagasu/allstepMPMBeforeflow.py
+@@ -6,16 +6,15 @@
+ import xml.etree.ElementTree as ET 
+
+ import sys
+
+ import subprocess
+
++import time
+
++import ctypes
+
+ 
+
+ #全ステップの力をロード
+
+ args = sys.argv
+
+-if len(args) < 2:
+
+-    print('rewriteResumefn.py homogenize_stress_fn')
+
+ resume_xml_fn = args[1]
+
+ tree = ET.parse(resume_xml_fn)
+
+ root = tree.getroot()
+
+-if root[0].tag !="elements":
+
+-    print("not resume line")
+
++
+
+ element_fn = root[0].attrib["MPMstress"]
+
+ allelements = AllParticleHomogenizeData()
+
+ #全ステップ粒子ロードする
+
+@@ -24,8 +23,6 @@
+ 
+
+ allhomogenization_data = AllHomogenizeData()
+
+ 
+
+-if root[1].tag !="stress":
+
+-    print("not stress line")
+
+ pre_fn = root[1].attrib["pre_stress"]
+
+ #２週目以降はファイルをロードする
+
+ """
+
+@@ -35,29 +32,24 @@
+ """
+
+ 
+
+ #grid_startを取ってくる
+
+-if root[1].tag !="stress":
+
+-    print("not resume line")
+
+ post_fn = root[1].attrib["post_stress"]
+
+ allpost_homogenization_data = AllHomogenizeData()
+
+ allpost_homogenization_data.load(post_fn)
+
+ 
+
+ #gridのパラメータ
+
+-if root[4].tag !="grid":
+
+-    print("not grid line")
+
+ h = float(root[4].attrib["h"])
+
+ 
+
+ #density
+
+ # XMLファイルを解析
+
+-if root[2].tag !="resume":
+
+-    print("not resume line")
+
+ resume_fn = root[2].attrib["resume_MPM_fn"]
+
+ resume_tree = ET.parse(resume_fn)
+
+ resume_root = resume_tree.getroot()
+
+-if resume_root[2].tag !="particles":
+
+-    print("not particles line")
+
+ density = float(resume_root[2].attrib["density"])
+
+ 
+
+ #タイムステップ取得
+
++#print(os.path.getsize(element_fn))
+
++#print(os.path.exists(element_fn))
+
++
+
+ with h5py.File(element_fn, "r") as h5:
+
+     keys = list(map(int, h5.keys()))
+
+     sorted_keys = sorted(keys)
+
+@@ -79,7 +71,7 @@
+     interpolate_stress.interpolateStress()
+
+     interpolate_stress.saveStress(homogenization_data)
+
+     allhomogenization_data.all_step_homogenization.append(homogenization_data)
+
+-    print(i)
+
++
+
+ allhomogenization_data.save(pre_fn)
+
+ 
+
+     
