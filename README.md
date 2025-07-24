@@ -2,6 +2,8 @@
 
 ## multi_projects_diff.py
 
+概要
+
 .pyファイルを"同名"で突き合わせ、存在有無をCSVで出力する。指定したいパスをpaths.txtに書く。
 出力される列について
 **ファイル名**: .pyの名前
@@ -23,7 +25,7 @@ python3 multi_projects_diff.py --list paths.txt --out ../output/multi_projects_d
 
 ## two_projects_diff.py
 
-### 概要
+概要
 
 指定した2つのディレクトリ内に存在する.pyファイルを洗い出し、共通の同名ファイルがあるかどうかを判定する。ある場合にはその同名のファイルのソースコードの差異を出力する。
 
@@ -40,7 +42,7 @@ python3 two_projects_diff.py \
   --ext .py
 ```
 
-### テスト
+テスト
 
 `tests` ディレクトリに同名の.pyフォルダが入っているp1, p2ディレクトリがある。この2つを指定して、出力されたCSVを見ることで、コードが機能しているかどうか判断できる。
 
@@ -51,4 +53,22 @@ python3 two_projects_diff.py \
   --out ../output/two_projects_diff.csv \
   --diff-dir ../output/diffs \
   --ext .py
+```
+
+## multi_directories_diff.py
+
+概要
+
+.pyファイルを"同名"で突き合わせ、存在有無とソースコードが一致しているもの同士でグルーピングをし、CSVで出力する。指定したいパスをpaths.txtに書く。
+
+出力される列について
+**ファイル名**: .pyの名前
+**exits_p⚪︎**: True/Falseでそのファイルが指定したディレクトリ内に存在するかどうか判定
+**path_p⚪︎**: 存在する場合のパスを表示
+**collision_p⚪︎**: 指定したディレクトリ内で重複している場合はそのパスを表示
+
+実行方法
+
+```bash
+python3 multi_directories_diff.py --list paths.txt --out ../output/multi_directories_diff.csv
 ```
