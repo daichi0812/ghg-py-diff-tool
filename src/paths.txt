@@ -17,4 +17,3 @@
 /Users/shotaro/DevHub/CG/GeneralizedHybridGrainsResearch-mac/src/python/Visualize/nagasu
 /Users/shotaro/DevHub/CG/GeneralizedHybridGrainsResearch-mac/src/python/Visualize/tameru
 /Volumes/ExtremeSSD/python/analysis/python/analysis
-/Volumes/ExtremeSSD/python/analysis/python/analysis-mac
